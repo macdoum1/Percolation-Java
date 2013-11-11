@@ -17,7 +17,7 @@ public class PercolationVisualizer
         }
     }
     
-    private static void fromFilename(String file)
+    private static void fromFilename(String file) // Get data from input file
     {
         // Read in file and set up percolation simulation
         In input = new In(file);
@@ -25,9 +25,9 @@ public class PercolationVisualizer
         Percolation simulation = new Percolation(N);
         
         StdDraw.show(0); // Show Window
-        draw(simulation,N);
+        draw(simulation,N); // Draw simulation
         StdDraw.show(guiDelay); // Delay
-        while(!input.isEmpty())
+        while(!input.isEmpty()) // Iterate while input file is no empty
         {
             int x = input.readInt();
             int y = input.readInt();
@@ -38,7 +38,9 @@ public class PercolationVisualizer
     }
     public static void draw(Percolation simulation, int N)
     {
+    	// Clear standard draw
         StdDraw.clear();
+        
         // Pen Color
         StdDraw.setPenColor(StdDraw.BLACK);
         
@@ -49,6 +51,7 @@ public class PercolationVisualizer
         // Filled Square Parameters
         StdDraw.filledSquare(N/2.0,N/2.0,N/2.0);
         
+        // Iterate through N x N grid
         for (int r = 1; r <= N; r++)
         {
             for(int c = 1; c <= N; c++)

@@ -5,9 +5,9 @@ public class PercolationStats
 
     private double[] resultArray; //Holds results
     
-    private int totalOpened;
-    private int N;
-    private int count;
+    private int totalOpened; // How many spaces opened
+    private int N; // Size for NxN grid
+    private int count; // Count of simulation runs
     
     public PercolationStats(int N, int T) // Constructor
     {
@@ -21,10 +21,16 @@ public class PercolationStats
         count = 0;
         this.N = N;
         
+        // Iterates T times
         for(int i = 0; i < T; i++)
         {
+        	// Run Simulation
             int singleResult = simulation(N);
+            
+            // Store result in resultArray
             resultArray[i] = (double) singleResult/N/N;
+            
+            // 
             totalOpened = totalOpened + singleResult;
             count++;
         }
@@ -42,7 +48,7 @@ public class PercolationStats
             if(!simulation.isOpen(i,j)) // Checks if not open
             {
                 x++;
-                simulation.open(i,j);
+                simulation.open(i,j); // Open site
             }
         }
         return x;
@@ -68,15 +74,18 @@ public class PercolationStats
     
     public static void main(String[] args) // Simple Driver
     {
+    	// Prompt user for values for N and T
         StdOut.println("Enter a value for N");
         int N = StdIn.readInt();
         StdOut.println("Enter a value for T");
         int T = StdIn.readInt();
         
+        // Time and run simulation
         Stopwatch sw = new Stopwatch();
         PercolationStats monteCarlo = new PercolationStats(N,T);
         double totalTime = sw.elapsedTime();
         
+        // Print results of simulation
         double mean = monteCarlo.getMean();
         double stdDev = monteCarlo.getStdDev();
         double bottom = (mean - (1.96*stdDev)/Math.sqrt(T));
